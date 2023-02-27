@@ -1,0 +1,208 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+
+
+    <section id="contact" class="contact">
+        <div class="container mt-5"><br></div>
+        <div class="container" data-aos="fade-up">
+            <div class="row d-flex ">
+                <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'interviewSelectPage' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+                <div class="col-8 section-title">
+                    <h2>ข้อมูลนิสิต </h2>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <div class="w-50">
+                    <form action="forms/time.php" method="post" role="form" class="php-email-form">
+                        <p style="text-align:center;"><img style="width: 250px; height: 250px;" src="{{student_doc.picture.url}}" alt="" class="rounded"></p> {{ forloop.counter }} {% for studentData in studentDataList %}
+                        <div class="row">
+                            <div class="form-group">
+                                <label for="title">คำนำหน้า</label><span class="req"> *</span>
+                                <input type="text" value="{{ studentData.title }}" class="form-control" readonly>
+
+                            </div>
+                            <div class="form-group ">
+                                <label for="firstname ">ชื่อจริง</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.firstname }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="lastname ">นามสกุล</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.lastname }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="email ">Email</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.email }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="student_id ">รหัสนิสิต</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.student_id }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="major ">สาขาวิชา (กรณีนิสิตหลักสูตรบริหาร ให้เลือกสาขาวิชาที่ตั้งใจจะเลือกเรียน)</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.major }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="year ">ชั้นปี</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.year }}" class="form-control" readonly>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="gpax ">GPAX</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.gpax }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="phone ">เบอร์โทรศัพท์</label><span class="req "> *</span>
+                                <label class="description ">0XX-XXXXXXX</label>
+                                <input type="text" value="{{ studentData.phone }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="phone_brand ">ยี่ห้อและรุ่นโทรศัพท์</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.phone_brand }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="income ">รายได้ของนิสิต/เดือน (จากการทำงานพิเศษ)</label>
+                                <label class="description ">รายได้ที่นอกเหนือจากที่ได้รับจากบิดามารดา หรือทุนการศึกษา</label>
+                                <input type="text" value="{{ studentData.income }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="income_from ">แหล่งรายได้ของนิสิตจากข้อด้านบน</label>
+                                <input type="text" value="{{ studentData.income_from }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="abroad ">เคยไปต่างประเทศ ประเทศใดมาบ้าง รวมแล้วกี่ครั้ง</label>
+                                <input type="text" value="{{ studentData.abroad }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="address1 ">ที่อยู่ตามทะเบียนบ้าน</label><span class="req "> *</span>
+                                <input type="text" value="{{ studentData.address1 }}" class="form-control" readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="address_type ">ที่พักปัจจุบัน</label><span class="req "> *</span>
+                                <textarea readonly class="form-control" rows="4" cols="50"> {{ studentData.address_type }} </textarea>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="dormitory ">ค่าหอพัก/เดือน</label>
+                                <input type="text " value="{{ studentData.dormitory }} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="address2 ">ที่อยู่ที่พักปัจจุบัน</label><span class="req "> *</span>
+                                <textarea readonly class="form-control" rows="4" cols="50"> {{ studentData.address2 }} </textarea>
+                            </div>
+                            <div class="form-group ">
+                                <label for="father_job ">อาชีพบิดา</label><span class="req "> *</span>
+                                <label class="description ">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน "</label>
+                                <input type="text " value="{{ studentData.father_job }} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="avg_father_salary ">รายได้บิดาเฉลี่ยต่อเดือน</label><span class="req "> *</span>
+                                <label class="description ">กรณีค้าขาย ระบุรายได้ที่หักต้นทุนสินค้าแล้ว</label>
+                                <input type="text " value="{{ studentData.avg_father_salary }} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="phone_father ">เบอร์โทรศัพท์บิดา</label><span class="req "> *</span>
+                                <label class="description ">0XX-XXXXXXX</label>
+                                <input type="text " value="{{ studentData.phone_father }} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="mother_job ">อาชีพมารดา</label><span class="req "> *</span>
+                                <label class="description ">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน "</label>
+                                <input type="text " value="{{ studentData.mother_job }} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="avg_mother_salary ">รายได้มารดาเฉลี่ยต่อเดือน</label><span class="req "> *</span>
+                                <label class="description ">กรณีค้าขาย ระบุรายได้ที่หักต้นทุนสินค้าแล้ว</label>
+                                <input type="text " value="{{ studentData.avg_mother_salary}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="phone_mother ">เบอร์โทรศัพท์มารดา</label><span class="req "> *</span>
+                                <label class="description ">0XX-XXXXXXX</label>
+                                <input type="text " value="{{ studentData.phone_mother}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="status_parent ">สถานภาพสมรสของบิดา-มารดา</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.status_parent}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="case_separated ">กรณีแยกกันอยู่ นิสิตอาศัยอยู่กับ</label>
+                                <input type="text " value="{{ studentData.case_seperated}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="parents_relationship ">กรณีมีผู้ปกครอง (ระบุความเกี่ยวข้อง)</label>
+                                <input type="text " value="{{ studentData.parents_relationship}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="parent_job ">อาชีพผู้ปกครอง</label>
+                                <label class="description ">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน "</label>
+                                <input type="text " value="{{ studentData.parent_job}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="avg_parent_salary ">รายได้ผู้ปกครองเฉลี่ยเดือนละ</label>
+                                <input type="text " value="{{ studentData.avg_parent_salary}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="phone_parent ">เบอร์โทรศัพท์ผู้ปกครอง</label>
+                                <label class="description ">0XX-XXXXXXX</label>
+                                <input type="text " value="{{ studentData.phone_parent}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="num_sibling ">จำนวนพี่น้องที่บิดามารดาต้องอุปการะ (นับรวมนิสิตด้วย)</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.num_sibling}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="num_working_sib ">จำนวนพี่น้องที่ทำงานแล้ว</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.num_working_sib}} " class="form-control " readonly>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="other_income ">ครอบครัวมีแหล่งรายได้อื่นต่อเดือน</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.other_income}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="other_income_from ">แหล่งรายได้มาจาก</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.other_income_from}} " class="form-control " readonly>
+                            </div>
+
+                            <div class="form-group ">
+                                <label for="debt_amount ">จำนวนหนี้สิน (บาท)</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.debt_amount}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="source_of_debt ">ที่มาของหนี้สิน</label><span class="req "> *</span>
+                                <input type="text " value="{{ studentData.source_of_debt}} " class="form-control " readonly>
+                            </div>
+                            <div class="form-group ">
+                                <label for="reason_of_apply ">เหตุผลความจำเป็นในการขอทุน (อธิบายให้ชัดเจน)</label><span class="req "> *</span>
+                                <textarea readonly class="form-control" rows="4" cols="50"> {{ studentData.reason_of_apply}} </textarea>
+                            </div>
+                            <div class="form-group ">
+                                <label for="level_necessity ">ระบุระดับของความจำเป็นในการรับทุน (1 หมายถึงให้ทุนกับนิสิตอื่นที่ลำบากกว่าได้, 10 หมายถึง ถ้าไม่ได้ทุน จะไม่สามารถเรียนต่อได้)<span class="req "> *</span></label>
+                                <input type="text " value="{{ studentData.level_necessity}} " class="form-control " readonly>
+                            </div>
+                            <div>
+                                <label for="level_necessity ">แบบคำขอรับทุนการศึกษา<span class="req "> *</span></label>
+                                <button type="submit " class="btn btn-primary btn-sm center " style='color: white;'>
+                                <a style='color: white; text-decoration:none;' href="{{ student_doc.schorlarship_doc.url }} " target="_blank">แบบคำขอรับทุนการศึกษา </a></button>
+                            </div>
+                            <br><br>
+                            <div>
+                                <label for="level_necessity ">หลักฐานอื่นๆประกอบการพิจารณา<span class="req "> *</span></label>
+                                <button type="submit " class="btn btn-primary btn-sm center " style='color: white;'>
+                                <a style='color: white; text-decoration:none;' href="{{ student_doc.other_doc.url }} " target="_blank">หลักฐานอื่นๆประกอบการพิจารณา </a></button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    </div>
+    </section>
+
+</main>
+{% endblock contentdetail %}>

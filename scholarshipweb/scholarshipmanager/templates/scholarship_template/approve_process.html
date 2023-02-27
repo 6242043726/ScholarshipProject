@@ -1,0 +1,42 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+    <div class="container mt-5"><br></div>
+    <div class="container mt-5" data-aos="fade-up">
+        <div class="row d-flex ">
+            <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'mainMenu' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+            <div class="col-8 section-title">
+                <h2>รายชื่อนิสิตรอการประเมิน</h2>
+            </div>
+        </div>
+
+        <!-- table -->
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>รหัสนิสิต
+                    <th>ชื่อ</th>
+                    <th>นามสกุล</th>
+                    <th>รายละเอียด</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for approveData in approveList %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ approveData.student_id }}</td>
+                    <td>{{ approveData.firstname }}</td>
+                    <td>{{ approveData.lastname }}</td>
+                    <td><button type="submit" class="btn btn-primary btn-sm center" style='color: white;' href="{% url 'approveDetail' approveData.student_id %}">
+                        <a style='color: white; text-decoration:none;' href="{% url 'approveDetail' approveData.student_id %}">เรียกดูข้อมูล</button></td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+    </div>
+</main>
+<!-- End #main -->
+{% endblock contentdetail %}

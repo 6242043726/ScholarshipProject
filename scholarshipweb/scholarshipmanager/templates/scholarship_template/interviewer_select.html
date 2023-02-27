@@ -1,0 +1,50 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+    <div class="container mt-5"><br></div>
+    <div class="container mt-5" data-aos="fade-up">
+        <div class="row d-flex ">
+            <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'mainMenu' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+            <div class="col-8 section-title">
+                <h2>รายชื่อนิสิตที่ต้องกรอกผลการสัมภาษณ์</h2>
+            </div>
+        </div>
+
+        <!-- table -->
+        <table id="example" class="table table-striped " style="width:100%">
+            <thead>
+                <tr>
+                    <th style="width: 150px; text-align: center;" scope="col">ลำดับการสัมภาษณ์</th>
+                    <th style="width: 150px;" scope="col">รหัสนิสิต</th>
+                    <th style="width: 170px;" scope="col">ชื่อ</th>
+                    <th style="width: 170px;" scope="col">นามสกุล</th>
+                    <th style="width: 150px;" scope="col">วันที่สัมภาษณ์</th>
+                    <th scope="col" style="width: 150px;">ช่วงเวลา</th>
+                    <th scope="col" style="width: 100px; text-align: left;">รายละเอียด</th>
+                    <th scope="col" style="width: 150px; text-align: center;">กรอกผลการสัมภาษณ์</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for studentData in studentDataList %} {% if studentData.status == 0 %}
+                <tr>
+                    <th scope="row" style="text-align: center;">{{ forloop.counter }}</th>
+                    <td>{{ studentData.student_id }}</td>
+                    <td>{{ studentData.firstname }}</td>
+                    <td>{{ studentData.lastname }}</td>
+                    <td>{{ studentData.interview_date }}</td>
+                    <td>{{ studentData.interview_time }} น.</td>
+                    <td style="text-align: left;">
+                        <button type=" submit " class="btn btn-primary btn-sm center " style='color: white;' href="{% url 'interviewDisplayPage' studentData.student_id %} ">
+                        <a style='color: white; text-decoration:none;' href="{% url 'interviewDisplayPage' studentData.student_id %} ">เรียกดูข้อมูล</button>
+                    </td>
+                    <td style="text-align: center;">
+                        <button type="submit" class="btn btn-primary btn-sm center" style='color: white;' href="{% url 'interviewDisplayPage' studentData.student_id %}">
+                            <a style='color: white; text-decoration:none;' href="{% url 'interviewResultPage' studentData.student_id %}">กรอกผลการสัมภาษณ์</a>
+                        </button>
+                    </td>
+                </tr>
+                {% endif %} {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
+{% endblock contentdetail %}

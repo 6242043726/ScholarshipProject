@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>CBS Scholarship</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="https://scontent.fbkk12-1.fna.fbcdn.net/v/t39.30808-6/301388856_520539780076474_820289802017298656_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=akj35tl79tAAX9Ec1gW&_nc_zt=23&_nc_ht=scontent.fbkk12-1.fna&oh=00_AfCqbI8FKNxlSK0aFbXLrUlsPMIhToVbGrNyFHjYF4owsw&oe=639B20A1" rel="icon">
+
+  <!-- Google Fonts -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body style="background-color: #37517e;">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top" style="background-color: #37517e;">
+    <div class="container d-flex align-items-center">
+      <img src="https://scontent.fbkk12-1.fna.fbcdn.net/v/t39.30808-6/301388856_520539780076474_820289802017298656_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=akj35tl79tAAX9Ec1gW&_nc_zt=23&_nc_ht=scontent.fbkk12-1.fna&oh=00_AfCqbI8FKNxlSK0aFbXLrUlsPMIhToVbGrNyFHjYF4owsw&oe=639B20A1" alt="" width="40" class="rounded me-2">
+      <h1 class="logo me-auto text-white">CBS</h1>
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="scrollto">{{ request.user }}</a></li>
+          <li><a class="getstarted scrollto" href="{% url 'logout' %}">Log out</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+    </div>
+    <hr class="text-white ms-5 me-5">
+  </header><!-- End Header -->
+
+
+<!--  ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+        <section id="services" class="services">
+          <div class="section-title">
+            <h1>Menu</h1>
+          </div>
+        
+        <br>
+
+        {% for group in request.user.groups.all %}
+            {% if group.name == 'student' %}
+            <div class="row">
+                <div class="col-md-4 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bx bx-file"></i></i></div>
+                    <h4><a href="{% url 'studentUpdatePage' %}">เพิ่มข้อมูล / แก้ไข</a></h4>
+                  </div>
+                </div>
+      
+                <div class="col-md-4 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bx bx-tachometer"></i></div>
+                    <h4><a href="{% url 'studentTimePage' %}">ลงเวลาสัมภาษณ์</a></h4>
+                  </div>
+                </div>
+      
+                <div class="col-md-4 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="500">
+                  <div class="icon-box">
+                    <div class="icon"><i class="bx bx-layer"></i></div>
+                    <h4><a href="{% url 'studentResultPage' %}">ผลการสัมภาษณ์</a></h4>
+                  </div>
+                </div>
+      
+              </div>
+                
+            </section>
+            </div>
+      
+        </section><!-- End Hero -->
+
+
+            {% endif %}
+
+            {% if group.name == 'interviewer' %}
+            <div class="container">
+                <div class="row">
+                <div class="col-md-6 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="icon-box">
+                    <div class="icon"><i class='bx bx-add-to-queue'></i></div>
+                    <h4><a href="{% url 'interviewSelectPage' %}">กรอกผลการสัมภาษณ์</a></h4>
+                  </div>
+                </div>
+      
+                <div class="col-md-6 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
+                  <div class="icon-box">
+                    <div class="icon"><i class='bx bx-history' ></i></div>
+                    <h4><a href="{% url 'interviewerHistoryPage' %}">ประวัติการสัมภาษณ์</a></h4>
+                  </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if group.name == 'approver' %}
+            <div class="container">
+                <div class="row">
+                <div class="col-md-6 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="icon-box">
+                    <div class="icon"><i class='bx bxs-user-check'></i></div>
+                    <h4><a href="{% url 'approveProcess' %}">อนุมัติทุนการศึกษา</a></h4>
+                    </div>
+                </div>
+
+                <div class="col-md-6 d-flex d-flex justify-content-center align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="icon-box">
+                    <div class="icon"><i class='bx bx-history' ></i></div>
+                    <h4><a href="{% url 'approveHistory' %}">ประวัติการประเมินผล</a></h4>
+                    </div>
+                </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+
+    
+    </section><!-- End Services Section -->
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+
+
+  <div id="preloader"></div>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

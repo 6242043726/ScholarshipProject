@@ -1,0 +1,186 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+    <section id="contact" class="contact">
+        <div class="container mt-5"><br></div>
+        <div class="container" data-aos="fade-up">
+            <div class="row d-flex ">
+                <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'interviewSelectPage' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+                <div class="col-8 section-title">
+                    <h2>กรอกผลการสัมภาษณ์</h2>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="w-100">
+                    {% if returnMessage %}
+                    <h1 class="h5 mb-3 d-flex justify-content-center">
+                        {{ returnMessage }}
+                    </h1>
+                    {% else %}
+                    <form method="POST" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for interviewData in interviewDataList %}
+                            <div class="col-lg-4 text-center">
+                                <div class="text-center">
+                                    <img src="{{student_data.picture.url}}" alt="" class="rounded" style="max-width:300px ;max-height:300px;">
+                                </div>
+                                <div class="row mt-4" style="justify-content:center;">
+                                    <p>
+                                        <b>ชื่อ-นามสกุล:</b> {{student_data.title}} {{student_data.firstname}} {{student_data.lastname}}</p>
+                                </div>
+                                <div class="row">
+                                    <p><b>รหัสนิสิต:</b> {{student_data.student_id}}</p>
+                                </div>
+                                <div class="row">
+                                    <p><b>ชั้น:</b> {{student_data.year}} <b>ภาควิชา:</b> {{student_data.major}}</p>
+                                </div>
+                                <div class="row">
+                                    <p><b>เบอร์โทร:</b> {{student_data.phone}}</p>
+                                </div>
+                                <div class="row">
+                                    <p>
+                                        <b>Email:</b> {{student_data.email}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <label for="myInformation">ข้อมูลจากการสัมภาษณ์</label><span class="req"> *</span>
+                                    <textarea class="form-control" id="myInformation" name="myInformation" rows="4" cols="50" required></textarea>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="myResult">สรุปความเห็นจากการสัมภาษณ์</label><span class="req"> *</span>
+                                    <br>
+                                    <input type="radio" id="myResult" name="myResult" value="มีความจำเป็นได้รับทุน" style="vertical-align:middle;"> มีความจำเป็นได้รับทุน<br>
+                                    <input type="radio" id="myResult" name="myResult" value="ยังไม่มีความจำเป็นได้รับทุน" style="vertical-align:middle;"> ยังไม่มีความจำเป็นได้รับทุน<br>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myUni_ss_b1">จำนวนเงินทุน ข1 จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myUni_ss_b1" id="myUni_ss_b1" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row ">
+                                        <div class="col-7">
+                                            <label for="myUni_ss_b2">จำนวนเงินทุน ข2 จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myUni_ss_b2" id="myUni_ss_b2" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myUni_ss_c">จำนวนเงินทุน ค จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2 ">
+                                            <input type="text" class="form-control" name="myUni_ss_c" id="myUni_ss_c" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myFac_ss_b1 ">จำนวนเงินทุน ข1 จากคณะ ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myFac_ss_b1" id="myFac_ss_b1" style="height:36px;">
+                                        </div>
+                                        <div class="col-3 ">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myFac_ss_b2">จำนวนเงินทุน ข2 จากคณะ ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myFac_ss_b2" id="myFac_ss_b2" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myFac_ss_c">จำนวนเงินทุน ค จากคณะ ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myFac_ss_c" id="myFac_ss_c" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myExt_ss_b1">จำนวนเงินทุน ข1 จากภายนอก ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myExt_ss_b1" id="myExt_ss_b1" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myExt_ss_b2">จำนวนเงินทุน ข2 จากภายนอก ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myExt_ss_b2" id="myExt_ss_b2" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <label for="myExt_ss_c">จำนวนเงินทุน ค จากภายนอก ที่นิสิตควรได้รับต่อเทอม</label>
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" name="myExt_ss_c" id="myExt_ss_c" style="height:36px;">
+                                        </div>
+                                        <div class="col-3">บาท</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label for="myAdditional_comments">ความเห็นเพิ่มเติมเกี่ยวกับการพิจารณาทุน</label><span class="req"> *</span>
+                                    <textarea class="form-control" id="myAdditional_comments" name="myAdditional_comments" rows="4" cols="50" required></textarea>
+                                </div>
+                            </div>
+                            <div class="text-center"><button type="submit">Submit</button></div>
+                            {% endfor %}
+                    </form>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+    </section>
+</main>
+<!-- End #main -->
+{% endblock contentdetail %}

@@ -1,0 +1,202 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+    <section id="contact" class="contact">
+        <div class="container mt-5"><br></div>
+        <div class="container" data-aos="fade-up">
+            <div class="row d-flex ">
+                <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'approveProcess' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+                <div class="col-8 section-title">
+                    <h2>ประเมินการให้ทุนการศึกษา</h2>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-center">
+                    {% if returnMessage %}
+                    <h1 class="h5 mb-3 d-flex justify-content-center">
+                        {{ returnMessage }}
+                    </h1>
+                    {% else %}
+                <div class="w-100">
+                    <form method="POST" class="php-email-form">
+                        {% csrf_token %}
+                        <div class="row">
+                          {% for interviewData in interviewDataList %}
+                          <div class="col-lg-4 text-center">
+                            <div class="text-center">
+                              <img src="{{student_data.picture.url}}" alt="" class="rounded" style="max-width:300px ;max-height:300px;">
+                            </div>
+                            <div class="row mt-4">
+                              <p><b>ชื่อ-นามสกุล:</b> {{student_data.title}} {{student_data.firstname}} {{student_data.lastname}}</p>
+                            </div>
+                            <div class="row">
+                              <p><b>รหัสนิสิต:</b> {{student_data.student_id}}</p>
+                            </div>
+                            <div class="row">
+                              <p><b>ชั้น:</b> {{student_data.year}} <b>ภาควิชา:</b> {{student_data.major}}</p>
+                            </div>
+                            <div class="row">
+                              <p><b>เบอร์โทร:</b> {{student_data.phone}}</p>
+                            </div>
+                            <div class="row">
+                              <p><b>Email:</b> {{student_data.email}}</p>
+                            </div>
+                            <div class="row">
+                              <p><b>รายชื่อกรรมการสัมภาษณ์:</b> 
+                                <br> {{interviewData.interviewer_1_name}}
+                                <br> {{interviewData.interviewer_2_name}}
+                                <br> {{interviewData.interviewer_3_name}}</p>
+                            </div>
+                          </div>
+                          
+                          <div class="col-lg-8">
+                            <div class="form-group">
+                            <label for="myInformation">ข้อมูลจากการสัมภาษณ์</label>
+                            <textarea class="form-control" id="myInformation" name="myInformation" rows="4" cols="50" readonly>{{interviewData.information}}</textarea>
+                            </div>
+
+                            <div class="form-group">
+                              <label for="myResult">สรุปความเห็นจากการสัมภาษณ์</label><span class="req"></span>
+                              <input type="text " id="myResult" class="form-control" name="myResult" style="height:36px;" value="{{interviewData.result}}" readonly>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myUni_ss_b1">จำนวนเงินทุน ข1 จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myUni_ss_b1" id="myUni_ss_b1" style="height:36px;" value="{{interviewData.uni_ss_b1}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myUni_ss_b2">จำนวนเงินทุน ข2 จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myUni_ss_b2" id="myUni_ss_b2" style="height:36px;" value="{{interviewData.uni_ss_b2}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myUni_ss_c">จำนวนเงินทุน ค จากมหาลัย ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myUni_ss_c" id="myUni_ss_c" style="height:36px;" value="{{interviewData.uni_ss_c}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myFac_ss_b1">จำนวนเงินทุน ข1 จากคณะ ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myFac_ss_b1" id="myFac_ss_b1" style="height:36px;" value="{{interviewData.fac_ss_b1}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myFac_ss_b2">จำนวนเงินทุน ข2 จากคณะ ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myFac_ss_b2" id="myFac_ss_b2" style="height:36px;" value="{{interviewData.fac_ss_b2}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myFac_ss_c">จำนวนเงินทุน ค จากคณะ ที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myFac_ss_c" id="myFac_ss_c" style="height:36px;" value="{{interviewData.fac_ss_c}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myExt_ss_b1">จำนวนเงินทุน ข1 จากภายนอกที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myExt_ss_b1" id="myExt_ss_b1" style="height:36px;" value="{{interviewData.ext_ss_b1}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myExt_ss_b2">จำนวนเงินทุน ข2 จากภายนอกที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myExt_ss_b2" id="myExt_ss_b2" style="height:36px;" value="{{interviewData.ext_ss_b2}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-7">
+                                  <label for="myExt_ss_c">จำนวนเงินทุน ค จากภายนอกที่นิสิตควรได้รับต่อเทอม</label><span class="req"> *</span>
+                                </div>
+                                <div class="col-2">
+                                  <input type="text" class="form-control" name="myExt_ss_c" id="myExt_ss_c" style="height:36px;" value="{{interviewData.ext_ss_c}}" required>
+                                </div>
+                                <div class="col-3">บาท</div>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="form-group">
+                            <label for="myAdditional_comments">ความเห็นเพิ่มเติมเกี่ยวกับการพิจารณาทุน</label><span class="req"> *</span>
+                            <textarea class="form-control" id="myAdditional_comments" name="myAdditional_comments" rows="4 " cols="50" required>{{interviewData.additional_comments}}</textarea>
+                          </div>
+                        </div>
+
+                        <div class="text-center">
+                          <h3>ผลการประเมิน</h3>
+                          <input style="position:relative; top:16px;" type="radio" id="status1" name="myStatus" value="2">
+                          <label for="status1" style='color: green;'>อนุมัติทุนการศึกษา&nbsp; &nbsp; &nbsp; </label>
+                          <input style="position:relative; top:16px;" type="radio" id="status2" name="myStatus" value="3">
+                          <label for="status2" style='color: red;'>ไม่อนุมัติทุนการศึกษา</label>
+                        </div>
+                        <br>
+                        <br>
+                 
+                        <div class="text-center"><button type="submit">Submit</button></div>
+                        
+                        {% endfor %}
+                    </form>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+    </section>
+
+</main>
+<!-- End #main -->
+{% endblock contentdetail %}

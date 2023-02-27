@@ -1,0 +1,232 @@
+{% extends 'scholarship_template/base.html' %}
+{% load static %}
+  {% block contentdetail %}
+  <main id="main">
+
+
+    <!-- =======Form Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container mt-5"><br></div>
+      <div class="container" data-aos="fade-up">
+            <div class="row d-flex ">
+                <div class="col-1"><a class="btn btn-outline-primary btn-sm" href="{% url 'mainMenu' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+                <div class="col-10 section-title">
+                    <h2>เพิ่มข้อมูล / แก้ไข</h2>
+                    <div class=description>
+                      <p style="text-indent: 2.5em;">ฝ่ายกิจการนิสิตจะพิจารณาตามความจำเป็นเดือดร้อนของนิสิต ขอให้นิสิตกรอกข้อมูลตามความเป็นจริงให้ครบถ้วน เพื่อพิจารณาได้อย่างเหมาะสม ในกรณีที่นิสิตได้รับทุน นิสิตจะต้องมาช่วยงานคณะฯ หรือทำกิจกรรมตามที่ฝ่ายฯ กำหนดไว้ตามอย่างเคร่งครัด มิฉะนั้นอาจถูกพิจารณาลดทุนหรือยกเลิกทุนตามที่ฝ่ายกิจการนิสิตเห็นสมควร</p>
+                      <label>1. ขอให้นิสิตดำเนินการนำส่งเอกสารดังต่อไปนี้</label>
+                      <label>
+                      <label>(1) รูปนิสิต  พื้นหลังสีขาว ขนาดไม่เกิน 300 x 300 pixel</label>
+               <label>(2) แบบคำขอรับทุน ตามลิงค์ <a href="https://drive.google.com/file/d/1HtD15yq9WmbapJ5YC1pVUFH75vm5BR7i/view?usp=sharing">ลิ้งค์แบบคำขอรับทุน</a> ตั้งชื่อเป็น ชื่อ นามสกุล (1)
+            กรณีนิสิตขอทุนครั้งแรก ต้องแนบเอกสารให้ครบถ้วน ทั้งนี้กรณีจัดเตรียมหนังสือรับรองฐานะครอบครัวไม่ทัน นิสิตสามารถส่งเอกสารเพิ่มเติมในวันสัมภาษณ์ทุนได้
+               (2) หลักฐานอื่นๆ ประกอบการพิจารณา ตั้งชื่อไฟล์เป็น ชื่อ นามสกุล</label>
+            <label>(3) ให้แนบเอกสารการเงินที่สามารถนำมาประกอบการพิจารณาทุน เช่น รายได้ปัจจุบันและหนี้สิน</label>
+            <label>2. เลือกวันเวลาที่สะดวกสัมภาษณ์ (ในเมนูลงเวลาสัมภาษณ์) โดยฝ่ายฯ จะประกาศรายชื่อและเวลาสัมภาษณ์ให้ทราบ และกำหนดให้มีการสัมภาษณ์ผ่าน ZOOM (สำหรับนิสิตที่ขอทุนครั้งแรก ฝ่ายฯ จะแจ้งให้ทราบทางอีเมล์นิสิตและไลน์กลุ่ม)</label>
+                         </div>
+                </div>
+            </div>
+    <div class="d-flex justify-content-center">
+      <div class="w-50">
+        
+            <form action="" method="post" class="php-email-form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="text-center">
+                  <img src="{{request.user.student.picture.url}}" alt="" class="rounded" style="max-width:300px ;max-height:300px;">
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <label for="title">คำนำหน้า</label><span class="req"> *</span>
+                      {{ form.title }}
+                  </div>
+                  <div class="form-group">
+                    <label for="firstname">ชื่อจริง</label><span class="req"> *</span>
+                    {{ form.firstname }}
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">นามสกุล</label><span class="req"> *</span>
+                    {{ form.lastname }}
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label><span class="req"> *</span>
+                    {{ form.email }}
+                  </div>
+                  <div class="form-group">
+                    <label for="student_id">รหัสนิสิต</label><span class="req"> *</span>
+                    {{ form.student_id }}
+                  </div>
+                  <div class="form-group">
+                    <label for="major">สาขาวิชา (กรณีนิสิตหลักสูตรบริหาร ให้เลือกสาขาวิชาที่ตั้งใจจะเลือกเรียน)</label><span class="req"> *</span>
+                      {{ form.major }}
+                  </div>
+                  <div class="form-group">
+                    <label for="year">ชั้นปี</label><span class="req"> *</span>
+                      {{ form.year }}
+                  </div>
+                   
+                  <div class="form-group">
+                    <label for="gpax">GPAX</label><span class="req"> *</span>
+                    {{ form.gpax }}
+                  </div>
+                    <div class="form-group">
+                    <label for="phone">เบอร์โทรศัพท์</label><span class="req"> *</span>
+                    <label class="description">0XX-XXXXXXX</label>
+                    {{ form.phone }}
+                  </div>
+                  <div class="form-group">
+                    <label for="phone_brand">ยี่ห้อและรุ่นโทรศัพท์</label><span class="req"> *</span>
+                    {{ form.phone_brand }}
+                  </div>
+                    <div class="form-group">
+                    <label for="income">รายได้ของนิสิต/เดือน (จากการทำงานพิเศษ)</label>
+                    <label class="description">รายได้ที่นอกเหนือจากที่ได้รับจากบิดามารดา หรือทุนการศึกษา</label>
+                    {{ form.income }}
+                  </div>
+                  <div class="form-group">
+                    <label for="income_from">แหล่งรายได้ของนิสิตจากข้อด้านบน</label>
+                    {{ form.income_from }}
+                  </div>
+                   <div class="form-group">
+                    <label for="abroad">เคยไปต่างประเทศ ประเทศใดมาบ้าง รวมแล้วกี่ครั้ง</label>
+                    {{ form.abroad }}
+                  </div>
+                   <div class="form-group">
+                    <label for="address1">ที่อยู่ตามทะเบียนบ้าน</label><span class="req"> *</span>
+                    {{ form.address1 }}
+                  </div>
+                  <div class="form-group">
+                    <label for="address_type">ที่พักปัจจุบัน</label><span class="req"> *</span>
+                      {{ form.address_type }}
+                  </div>
+                
+                 <div class="form-group">
+                    <label for="dormitory">ค่าหอพัก/เดือน</label>
+                      {{ form.dormitory }}
+                  </div>
+                 <div class="form-group">
+                    <label for="address2">ที่อยู่ที่พักปัจจุบัน</label><span class="req"> *</span>
+                    {{ form.address2 }}
+                  </div>
+                    <div class="form-group">
+                    <label for="father_job">อาชีพบิดา</label><span class="req"> *</span>
+                    <label class="description">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน"</label>
+                    {{ form.father_job }}
+                  </div>
+                  <div class="form-group">
+                    <label for="avg_father_salary">รายได้บิดาเฉลี่ยต่อเดือน</label><span class="req"> *</span>
+                    <label class="description">กรณีค้าขาย ระบุรายได้ที่หักต้นทุนสินค้าแล้ว</label>
+                    {{ form.avg_father_salary }}
+                  </div>
+                  <div class="form-group">
+                    <label for="phone_father">เบอร์โทรศัพท์บิดา</label><span class="req"> *</span>
+                    <label class="description">0XX-XXXXXXX</label>
+                    {{ form.phone_father }}
+                  </div>
+                  <div class="form-group">
+                    <label for="mother_job">อาชีพมารดา</label><span class="req"> *</span>
+                    <label class="description">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน"</label>
+                    {{ form.mother_job }}
+                  </div>
+                  <div class="form-group">
+                    <label for="avg_mother_salary">รายได้มารดาเฉลี่ยต่อเดือน</label><span class="req"> *</span>
+                    <label class="description">กรณีค้าขาย ระบุรายได้ที่หักต้นทุนสินค้าแล้ว</label>
+                    {{ form.avg_mother_salary }}
+                  </div>
+                  <div class="form-group">
+                    <label for="phone_mother">เบอร์โทรศัพท์มารดา</label><span class="req"> *</span>
+                    <label class="description">0XX-XXXXXXX</label>
+                    {{ form.phone_mother }}
+                  </div>
+                   <div class="form-group">
+                    <label for="status_parent">สถานภาพสมรสของบิดา-มารดา</label><span class="req"> *</span>
+                      {{ form.status_parent }}
+                  </div>
+                  <div class="form-group">
+                    <label for="case_separated">กรณีแยกกันอยู่ นิสิตอาศัยอยู่กับ</label>
+                      {{ form.case_separated }}
+                  </div>
+                  <div class="form-group">
+                    <label for="parents_relationship">กรณีมีผู้ปกครอง (ระบุความเกี่ยวข้อง)</label>
+                    {{ form.parents_relationship }}
+                  </div>
+                  <div class="form-group">
+                    <label for="parent_job">อาชีพผู้ปกครอง</label>
+                    <label class="description">โปรดระบุโดยละเอียด เช่น ค้าขาย ให้ระบุว่าค้าขายอะไร หากไม่ได้ทำงานระบุ "ไม่ได้ทำงาน"</label>
+                    {{ form.parent_job }}
+                  </div>
+                  <div class="form-group">
+                    <label for="avg_parent_salary">รายได้ผู้ปกครองเฉลี่ยเดือนละ</label>
+                    {{ form.avg_parent_salary }}
+                  </div>
+                   <div class="form-group">
+                    <label for="phone_parent">เบอร์โทรศัพท์ผู้ปกครอง</label>
+                    <label class="description">0XX-XXXXXXX</label>
+                    {{ form.phone_parent }}
+                  </div>
+                  <div class="form-group">
+                    <label for="num_sibling">จำนวนพี่น้องที่บิดามารดาต้องอุปการะ (นับรวมนิสิตด้วย)</label><span class="req"> *</span>
+                    {{ form.num_sibling }}
+                  </div>
+                  <div class="form-group">
+                    <label for="num_working_sib">จำนวนพี่น้องที่ทำงานแล้ว</label><span class="req"> *</span>
+                    {{ form.num_working_sib }}
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="other_income">ครอบครัวมีแหล่งรายได้อื่นต่อเดือน</label><span class="req"> *</span>
+                    <label class="description">หากไม่มีโปรดระบุ "0"</label>
+                    {{ form.other_income }}
+                  </div>
+                  <div class="form-group">
+                    <label for="other_income_from">แหล่งรายได้มาจาก</label><span class="req"> *</span>
+                    {{ form.other_income_from}}
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="debt_amount">จำนวนหนี้สิน (บาท)</label><span class="req"> *</span>
+                    {{ form.debt_amount }}
+                  </div>
+                  <div class="form-group">
+                    <label for="source_of_debt">ที่มาของหนี้สิน</label><span class="req"> *</span>
+                    {{ form.source_of_debt }}
+                  </div>
+                  <div class="form-group">
+                    <label for="reason_of_apply">เหตุผลความจำเป็นในการขอทุน (อธิบายให้ชัดเจน)</label><span class="req"> *</span>
+                   {{ form.reason_of_apply }}
+                  </div>
+                  <div class="form-group">
+                    <label for="level_necessity">ระบุระดับของความจำเป็นในการรับทุน (1 หมายถึงให้ทุนกับนิสิตอื่นที่ลำบากกว่าได้, 10 หมายถึง ถ้าไม่ได้ทุน จะไม่สามารถเรียนต่อได้)<span class="req"> *</span></label>
+                      {{ form.level_necessity }}
+                  </div>
+                  
+                  <div class="section-title">
+                    <h2 style="font-family: 'Kanit', sans-serif;">เอกสาร</h2>
+                    <div class=description>
+                    <label>จัดเตรียมเอกสารทั้งหมดเป็นไฟล์ PDF โดยตั้งชื่อไฟล์เป็น "ชื่อ นามสกุล (ระบุตัวเลขเป็นเลขตามลำดับข้อ)" โดยตัวเลขในวงเล็บ เรียงตามนี้ (1) แบบคำขอรับทุนการศึกษา  (2) หลักฐานอื่นๆ ประกอบการพิจารณา</label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                     <label for="picture">1. รูปนิสิต พื้นหลังสีขาว ขนาดไม่เกิน 300 x 300 pixel สกุลภาพ JPEG และขนาดไฟล์ไม่เกิน 10mb<span class="req"> *</span></label>
+                      <label >Select a file:</label>
+                      {{ form.picture }} <br><br>
+                  </div>
+                  <div class="form-group">
+                     <label for="schorlarship_doc">2. แบบคำขอรับทุนการศึกษา ( แนบเอกสารให้ครบถ้วน กรณีนิสิตที่เคยได้รับทุนมาแล้ว ไม่จำเป็นต้องใช้หนังสือรับรองฐานะครอบครัว) ขนาดไฟล์ไม่เกิน 10mb<span class="req"> *</span></label>
+                      <label >Select a file:</label>
+                      {{ form.schorlarship_doc }}
+                  </div>
+                  <div class="form-group">
+                     <label for="other_doc">3. หลักฐานอื่นๆประกอบการพิจารณา เช่น รายการเดินบัญชีธนาคารของผู้ปกครอง (Bank Statement) ย้อนหลัง 6 เดือน /หนังสือสัญญาให้เช่า / ใบแจ้งหนี้ เป็นต้น ขนาดไฟล์ไม่เกิน 10mb</label>
+                      <label>Select a file:</label>
+                      {{ form.other_doc }}<br>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit" value="Update" class="btn btn-primary" name="save">Submit</button>
+                </div>
+                
+            </form>
+      </div>
+    </div>
+    </section>
+  </main>
+  {% endblock contentdetail %}

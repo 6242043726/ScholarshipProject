@@ -1,0 +1,96 @@
+{% extends 'scholarship_template/base.html' %} {% load static %} {% block contentdetail %}
+<main id="main">
+    <section id="contact" class="contact">
+        <div class="container mt-5"><br></div>
+        <div class="container" data-aos="fade-up">
+            <div class="row d-flex ">
+                <div class="col-2"><a class="btn btn-outline-primary btn-sm" href="{% url 'approveHistory' %}" role="button"><i class='bx bx-caret-left'></i>Back</a></div>
+                <div class="col-8 section-title">
+                    <h2>ผลการให้ทุนการศึกษา</h2>
+                </div>
+            </div>
+            {% if returnMessage %}
+            <div class="d-flex justify-content-center" data-aos="fade-up">
+                <div class="w-50">
+                    <div class="text-center php-email-form">
+                        <h5 style="color: rgb(231, 186, 38); text-align: center;">
+                            {{ returnMessage }} {% else %}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            {% for interviewData in interviewDataList %} {% if interviewData.status == 0 or interviewData.status == 1 %}
+            <div class="d-flex justify-content-center" data-aos="fade-up">
+                <div class="w-50">
+                    <div class="text-center php-email-form">
+                        <h4 style="color: rgb(231, 186, 38); text-align: center;">
+                            กำลังรอการพิจารณา
+                        </h4>
+                    </div>
+                </div>
+            </div>
+            {% endif %} {% if interviewData.status == 2 %}
+            <!-- ======= Contact Section ======= -->
+            <div class="d-flex justify-content-center" data-aos="fade-up">
+                <div class=" w-80 ">
+                    <form action="" method="post " role="form " class="php-email-form ">
+                        <br>
+                        <h4 style="color: green; text-align: center; ">รายละเอียดทุนอุดหนุนการศึกษา</h4>
+                        <br><br>
+                        <div class="row text-center">
+                            <h5>{{student_data.student_id}} {{student_data.title}} {{student_data.firstname}} {{student_data.lastname}}</h5>
+                        </div>
+                        
+                        <!-- Table -->
+                        <table class="table table-striped " style="width:100% ">
+                            <thead>
+                                <tr>
+                                    <th scope="col " style="width: 100px; ">แหล่งทุน<br>ประเภททุน</th>
+                                    <th scope="col " style="width: 100px; ">มหาวิทยาลัย<br>ข1</th>
+                                    <th scope="col " style="width: 100px; ">มหาวิทยาลัย<br>ข2</th>
+                                    <th scope="col " style="width: 100px; ">มหาวิทยาลัย<br>ค</th>
+                                    <th scope="col " style="width: 100px; ">คณะ<br>ข1</th>
+                                    <th scope="col " style="width: 100px; ">คณะ<br>ข2</th>
+                                    <th scope="col " style="width: 100px; ">คณะ<br>ค</th>
+                                    <th scope="col " style="width: 100px; ">ภายนอก<br>ข1</th>
+                                    <th scope="col " style="width: 100px; ">ภายนอก<br>ข2</th>
+                                    <th scope="col " style="width: 100px; ">ภายนอก<br>ค</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for interviewData in interviewDataList %}
+                                <tr>
+                                    <th scope="row ">จำนวนเงิน<br>(บาท)</th>
+                                    <td>{{ interviewData.uni_ss_b1 }}</td>
+                                    <td>{{ interviewData.uni_ss_b2 }}</td>
+                                    <td>{{ interviewData.uni_ss_c }}</td>
+                                    <td>{{ interviewData.fac_ss_b1 }}</td>
+                                    <td>{{ interviewData.fac_ss_b2 }}</td>
+                                    <td>{{ interviewData.fac_ss_c }}</td>
+                                    <td>{{ interviewData.ext_ss_b1 }}</td>
+                                    <td>{{ interviewData.ext_ss_b2 }}</td>
+                                    <td>{{ interviewData.ext_ss_c }}</td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <h5 style="text-align: center; ">จำนวนเงินรวมต่อภาคการศึกษา: {{ interviewData.total_ss }} บาท</h5>
+
+                    </form>
+                </div>
+            </div>
+            {% endfor %} {% endif %} {% if interviewData.status == 3 %}
+            <div class="d-flex justify-content-center" data-aos="fade-up">
+                <div class=" w-50 ">
+                    <form action="" method="post " role="form " class="php-email-form ">
+                        <br>
+                        <h4 style="color: red; text-align: center; ">ไม่ได้รับทุนอุดหนุนการศึกษา</h4>
+                    </form>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+</main>
+{% endfor %} {% endif %} {% endblock contentdetail %}
