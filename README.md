@@ -1,6 +1,6 @@
 # ScholarshipProject
 
-Some Screenshots of this Scholarship website
+Some Screenshots of this Scholarship website \n
 ![1](https://user-images.githubusercontent.com/98745942/230613666-c1eaac02-b20f-4ea6-b96b-5b53dd287ba8.png)
 
 ![2](https://user-images.githubusercontent.com/98745942/230613779-7cb7e850-a807-4366-8066-735102e5212b.png)
